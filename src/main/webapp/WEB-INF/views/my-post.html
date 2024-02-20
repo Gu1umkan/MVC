@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .post-details {
+            margin-top: 20px;
+            display: flex;
+        }
+        .post-image {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .post-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .post-info {
+            flex: 2;
+        }
+        .post-info p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .like-btn, .comment-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .like-btn:hover, .comment-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Post Details</h2>
+    <div th:each="post:${userPost}">
+        <div class="post-details" th:each="image : ${post.getImages()}">
+            <div class="post-image">
+                <img th:src="${image.getImageURL()}" alt="Post Image">
+            </div>
+            <div class="post-info">
+                <p><strong>Title:</strong> <span th:text="${post.getTitle()}"></span></p>
+                <p><strong>Description:</strong> <span th:text="${post.getDescription()}"></span></p>
+                <p><strong>Date:</strong> <span th:text="${post.getCreatedAt()}"></span></p>
+                <div class="actions">
+                    <button class="like-btn">Like</button>
+                    <button class="comment-btn">Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+<script>
+    document.querySelectorAll('.like-btn').forEach(item => {
+        item.addEventListener('click', event => {
+            // Add your like functionality here
+            console.log('Liked!');
+        });
+    });
+
+    document.querySelectorAll('.comment-btn').forEach(item => {
+        item.addEventListener('click', event => {
+            // Add your comment functionality here
+            console.log('Commented!');
+        });
+    });
+</script>
+</body>
+</html>

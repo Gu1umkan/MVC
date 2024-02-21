@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import peaksoft.entity.Image;
 import peaksoft.entity.Post;
 import peaksoft.entity.User;
 import peaksoft.repo.PostRepository;
@@ -44,11 +45,24 @@ public class PostRepositoryImpl implements PostRepository {
         return entityManager.find(Post.class, postID);
     }
 
-    @Override
+    @Override @Transactional
     public void remove(Long userId, Long postID) {
-        Post post = findPostById(postID);
-        if (post.getUser().getId().equals(userId)){
-            entityManager.remove(findPostById(postID));}
+        List<Image> images = entityManager.createQuery("select i from Image i where i.post.id = :ID", Image.class)
+                .setParameter("ID", postID)
+                .getResultList();
+        for (Image image : images) {
+            System.out.println("image = " + image);
+            image.setPost(null);
+            entityManager.remove(image);
+        }
+
+        entityManager.remove(entityManager.find(Post.class, postID));
+
+
+//        entityManager.createQuery("delete from Post p where p.id = :pId")
+//                .setParameter("pId", postID);
+
+
     }
 
     @Override

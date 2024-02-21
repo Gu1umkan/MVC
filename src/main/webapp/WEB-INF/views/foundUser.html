@@ -98,7 +98,7 @@
 </head>
 <body>
 <!--<form action="#" th:method="POST" th:action="@{/searchUser}" th:object="${foundUser}" >-->
-<div class="container" th:object="foundUser">
+<div class="container" th:if="foundUser">
     <div class="profile">
         <div class="profile-header">
             <img th:src="${foundUser.getUserInfo().getImage()}" alt="Profile Picture" class="profile-picture">

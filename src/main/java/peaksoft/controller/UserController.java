@@ -74,18 +74,7 @@ public class UserController {
     public String  homePage(@ModelAttribute("currentUser")User user){
         return "/home";
     }
-    @GetMapping("/search")
-    public String findUser(Model model){
-        String name = "";
-        model.addAttribute("searchName", name);
-        return "search";
-    }
 
-    @PostMapping("/searchUser")
-    public String search(Model model, @ModelAttribute("searchName") String searchName){
-        model.addAttribute("foundUser",userService.findUserByName(searchName));
-        return "foundUser";
-    }
 
 
 

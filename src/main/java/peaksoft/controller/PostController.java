@@ -64,7 +64,7 @@ public class PostController {
     }
 
     @GetMapping("/update/{postId}")
-    public String updateForm(@PathVariable("postId") Long postID,Model model){
+    public String updateForm(@PathVariable("postId") Long postID, Model model){
         Post post = postService.findPostById(postID);
         model.addAttribute("post",post);
         return "/updatePost";

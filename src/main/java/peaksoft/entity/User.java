@@ -28,7 +28,7 @@ public class User extends BaseEntity {
     private UserInfo userInfo;
     @OneToOne(cascade = CascadeType.PERSIST)
     private Follower follower;
-    @OneToMany(mappedBy = "user",cascade ={ CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",cascade ={ CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.DETACH},fetch = FetchType.EAGER)
     private List<Post> posts;
     @ManyToOne
     private Image image;

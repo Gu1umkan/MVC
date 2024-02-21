@@ -11,4 +11,5 @@ public interface UserRepository {
   User signIn(User user) throws NotFoundException;
 
     User findById(Long id);
+  User findUserByName(String name);
 }

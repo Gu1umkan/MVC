@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Like extends BaseEntity{
     @Column(name = "is_like")
     private Boolean isLike;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Post post;
     @ManyToOne
     private Comment comment;

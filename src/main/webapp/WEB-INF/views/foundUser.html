@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile {
+            width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-info h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .profile-stats div {
+            text-align: center;
+        }
+
+        .profile-stats h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .profile-stats p {
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .action-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background-color: #3578e5;
+        }
+    </style>
+</head>
+<body>
+<!--<form action="#" th:method="POST" th:action="@{/searchUser}" th:object="${foundUser}" >-->
+<div class="container" th:object="foundUser">
+    <div class="profile">
+        <div class="profile-header">
+            <img th:src="${foundUser.getUserInfo().getImage()}" alt="Profile Picture" class="profile-picture">
+
+            <div class="profile-info">
+                <h1 th:text="${foundUser.userName} "></h1>
+                <p th:text="${foundUser.getUserInfo().getBiography()}"></p>
+                <!--                <h1>Username</h1>-->
+                <!--                <p>Bio: Here goes some information about the user.</p>-->
+            </div>
+            <div class="action-buttons">
+                <button>Subscribe</button>
+                <button>Message</button>
+            </div>
+        </div>
+        <div class="profile-stats">
+            <div>
+                <h2>Posts</h2>
+                <p>100</p>
+            </div>
+            <div>
+                <h2>Followers</h2>
+                <p>1000</p>
+            </div>
+            <div>
+                <h2>Following</h2>
+                <p>500</p>
+            </div>
+        </div>
+        <!-- Add other profile content such as posts, saved posts, etc. -->
+    </div>
+<!--    </form>-->
+</div>
+</body>
+</html>

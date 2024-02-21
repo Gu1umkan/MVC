@@ -31,24 +31,22 @@ public class PostController {
         return "/home";
     }
 
-    @GetMapping("/newPost/{userId}")
-    public String createPost(Model model,@PathVariable Long userId){
+    @GetMapping("/newPost")
+    public String createPost(Model model){
         Post post = new Post();
         model.addAttribute("newPost",post);
-        model.addAttribute("userId",userId);
         return "new-post";
     }
 
-    @PostMapping("/save/{userId}")
-    public String savePost(@ModelAttribute("newPost") Post post,
-                           @PathVariable Long userId
-                            , Model model){
-        postService.savePost(post,userId);
+    @PostMapping("/save")
+    public String savePost(@ModelAttribute("newPost") Post post, Model model){
+        postService.savePost(post,currentUser.getId());
         model.addAttribute("currentUser ", currentUser);
         model.addAttribute("subcribers", followerService.subcriberSize(currentUser.getFollower().getId()));
         model.addAttribute("subcribtions", followerService.subcriptionSize(currentUser.getFollower().getId()));
         model.addAttribute("post",postService.getAllPostByUserId(currentUser.getId()).size());
-        return "profile";
+        model.addAttribute("userPost", postService.getAllPostByUserId(currentUser.getId()));
+        return "/my-post";
     }
 
 
@@ -56,6 +54,26 @@ public class PostController {
     public String displayPost(Model model, @PathVariable Long userId){
        model.addAttribute("userPost", postService.getAllPostByUserId(userId));
       return "my-post";
+    }
+
+    @GetMapping ("/delete/{postId}")
+    public String deleteCompanyById(@PathVariable("postId") Long postId,Model model) {
+        postService.remove(currentUser.getId(),postId);
+        model.addAttribute("userPost", postService.getAllPostByUserId(currentUser.getId()));
+        return "my-post";
+    }
+
+    @GetMapping("/update/{postId}")
+    public String updateForm(@PathVariable("postId") Long postID,Model model){
+        Post post = postService.findPostById(postID);
+        model.addAttribute("post",post);
+        return "/updatePost";
+    }
+
+    @PostMapping("/editUpdate/{postId}")
+    public String updateCompany(@ModelAttribute("post") Post post ,@PathVariable ("postId")Long postId){
+        postService.update(postId,post);
+        return "my-post";
     }
 
 }

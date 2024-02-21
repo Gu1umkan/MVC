@@ -24,7 +24,7 @@ public class Post extends BaseEntity{
     private LocalDate createdAt ;
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
     private User user;
-    @OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post",cascade ={CascadeType.REMOVE, CascadeType.PERSIST,},fetch = FetchType.EAGER)
     private List<Image> images;
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;

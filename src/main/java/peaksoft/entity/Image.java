@@ -20,6 +20,6 @@ public class Image extends BaseEntity{
     private String imageURL;
     @OneToMany(mappedBy = "image")
     private List<User>  users;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Post post;
 }

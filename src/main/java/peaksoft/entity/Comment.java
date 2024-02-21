@@ -19,7 +19,7 @@ import java.util.List;
 public class Comment extends BaseEntity{
     private String comment;
     private LocalDate createdAt;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     private User user;
     @ManyToOne
     private Post post;

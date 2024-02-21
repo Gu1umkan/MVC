@@ -32,4 +32,21 @@ public class PostServiceImpl implements PostService {
     public List<Post> getAllPostByUserId(Long id) {
         return postRepository.getAllPostByUserId(id);
     }
+
+    @Override
+    public Post findPostById(Long postID) {
+        return postRepository.findPostById(postID);
+    }
+
+    @Override
+    public void remove(Long userId,Long postId) {
+    postRepository.remove(userId,postId);
+    }
+
+    @Override
+    public void update(Long postId, Post post) {
+      postRepository.update(postId,post);
+    }
+
+
 }

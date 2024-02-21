@@ -61,4 +61,9 @@ public class UserRepositoryImpl implements UserRepository {
        return entityManager.find(User.class,id);
      }
 
+     public User findUserByName(String name){
+        return  entityManager.createQuery("select u from User u where userName = :name",User.class)
+                .setParameter("name",name)
+                .getSingleResult();
+     }
 }

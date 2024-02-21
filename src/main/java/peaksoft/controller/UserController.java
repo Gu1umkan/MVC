@@ -3,10 +3,7 @@ package peaksoft.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import peaksoft.entity.User;
 import peaksoft.exception.NotFoundException;
 import peaksoft.service.FollowerService;
@@ -77,16 +74,21 @@ public class UserController {
     public String  homePage(@ModelAttribute("currentUser")User user){
         return "/home";
     }
+    @GetMapping("/search")
+    public String findUser(Model model){
+        String name = "";
+        model.addAttribute("searchName", name);
+        return "search";
+    }
 
-//    @GetMapping("/currentUser")
-//    public String currentUser(Model model){
-//
-//        return "/home";
-//    }
-//    @PostMapping("/showInfo")
-//    public String show(@ModelAttribute("currentUser") User user){
-//    return "/home";
-//    }
+    @PostMapping("/searchUser")
+    public String search(Model model, @ModelAttribute("searchName") String searchName){
+        model.addAttribute("foundUser",userService.findUserByName(searchName));
+        return "foundUser";
+    }
+
+
+
 
 }
 

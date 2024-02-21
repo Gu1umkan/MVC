@@ -62,6 +62,10 @@
         .like-btn:hover, .comment-btn:hover {
             background-color: #0056b3;
         }
+        .botton{
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -80,26 +84,14 @@
                     <button class="like-btn">Like</button>
                     <button class="comment-btn">Comment</button>
                 </div>
+                <td>
+                    <a th:href="@{/post/delete/{postId}(postId=${post.id})}" class="botton">Delete</a>
+                    <a th:href="@{/post/update/{postId}(postid=${post.id})}" class="botton">Update</a>
+                </td>
             </div>
         </div>
     </div>
-
+    <button class="create-post-btn" onclick="location.href='/post/newPost'">Create New Post</button>
     </div>
-
-<script>
-    document.querySelectorAll('.like-btn').forEach(item => {
-        item.addEventListener('click', event => {
-            // Add your like functionality here
-            console.log('Liked!');
-        });
-    });
-
-    document.querySelectorAll('.comment-btn').forEach(item => {
-        item.addEventListener('click', event => {
-            // Add your comment functionality here
-            console.log('Commented!');
-        });
-    });
-</script>
 </body>
 </html>

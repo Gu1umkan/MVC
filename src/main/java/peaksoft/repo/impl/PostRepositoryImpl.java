@@ -55,13 +55,7 @@ public class PostRepositoryImpl implements PostRepository {
             image.setPost(null);
             entityManager.remove(image);
         }
-
         entityManager.remove(entityManager.find(Post.class, postID));
-
-
-//        entityManager.createQuery("delete from Post p where p.id = :pId")
-//                .setParameter("pId", postID);
-
 
     }
 

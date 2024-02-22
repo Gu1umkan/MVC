@@ -35,7 +35,7 @@ public class UserController {
     public String signUp(@ModelAttribute("newUser") User user,Model model) {
         try {
           currentUser = userService.signUp(user);
-          model.addAttribute("currentUser",currentUser);
+            model.addAttribute("currentUser",currentUser);
             model.addAttribute("subcribers", followerService.subcriberSize(currentUser.getFollower().getId()));
             model.addAttribute("subcribtions", followerService.subcriptionSize(currentUser.getFollower().getId()));
             model.addAttribute("post",postService.getAllPostByUserId(currentUser.getId()).size());

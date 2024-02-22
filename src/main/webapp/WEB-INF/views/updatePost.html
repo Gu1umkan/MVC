@@ -28,7 +28,6 @@
 <div class="Company">
     <h1> Post Form</h1>
     <form th:method="POST" th:action="@{/post/editUpdate/{postId} (postId = ${post.id})}" th:object="${post}">
-
         <div class="mb-3">
             <label for="title" class="form-label">post title</label>
             <input type="text" th:field="*{title}" class="form-control" id="title">

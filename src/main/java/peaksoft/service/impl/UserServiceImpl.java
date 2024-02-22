@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByName(String name) {
+    public User findUserByName(String name) throws NotFoundException {
         return userRepository.findUserByName(name);
     }
 

@@ -12,5 +12,5 @@ public interface UserService {
     User signIn(User user) throws NotFoundException;
 
     User findById(Long id);
-    User findUserByName(String name);
+    User findUserByName(String name) throws NotFoundException;
 }

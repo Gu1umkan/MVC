@@ -26,6 +26,7 @@ public class User extends BaseEntity {
     private String phoneNumber;
     @OneToOne(cascade = CascadeType.PERSIST)
     private UserInfo userInfo;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     private Follower follower;
     @OneToMany(mappedBy = "user",cascade ={ CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.DETACH},fetch = FetchType.EAGER)

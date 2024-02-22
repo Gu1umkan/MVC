@@ -19,4 +19,9 @@ public class FollowerServiceImpl implements FollowerService {
     public int subcriptionSize(Long followerId) {
         return followerRepository.subcriptionSize(followerId);
     }
+
+    @Override
+    public void following(Long currentUserId, Long foundUserId) {
+        followerRepository.following(currentUserId,foundUserId);
+    }
 }

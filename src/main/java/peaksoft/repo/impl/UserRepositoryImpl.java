@@ -61,9 +61,13 @@ public class UserRepositoryImpl implements UserRepository {
        return entityManager.find(User.class,id);
      }
 
-     public User findUserByName(String name){
+     public User findUserByName(String name) throws NotFoundException {
+        try{
         return  entityManager.createQuery("select u from User u where userName = :name",User.class)
                 .setParameter("name",name)
                 .getSingleResult();
+        }catch (Exception e){
+            throw new NotFoundException("Not found UserName");
+        }
      }
 }

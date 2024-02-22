@@ -694,9 +694,9 @@
             <p>Columbia University - New York</p>
         </div>
         <ul class="content__list">
-            <li><span><p th:text="${subcribtions}"></p></span>Followers</li>
+            <li><span><p th:text="${subcribtions}"></p></span>Following</li>
             <li><span><p th:text="${post}" ></p></span>Posts</li>
-            <li><span><p th:text="${subcribers}"></p></span>Following</li>
+            <li><span><p th:text="${subcribers}"></p></span>Followers</li>
         </ul>
 
         <div class="content__button"><a class="button" th:href="@{/userInfo/update/{userInfoId}(userInfoId=${currentUser.getUserInfo().id})}">

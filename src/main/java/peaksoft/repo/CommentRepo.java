@@ -1,7 +1,10 @@
 package peaksoft.repo;
 
-import peaksoft.entity.User;
+import peaksoft.entity.Comment;
+
+import java.util.List;
 
 public interface CommentRepo {
-    void createComment(User user, Long postId, String comment);
+    void createComment(Long userId, Long postId, Comment comment);
+    List<Comment> getCommentsByPostId(Long postId);
 }

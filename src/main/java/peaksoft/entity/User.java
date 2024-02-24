@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,5 +44,10 @@ public class User extends BaseEntity {
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public void addComment(Comment comment){
+        if(this.comments == null)this.comments = new ArrayList<>();
+        this.comments.add(comment);
     }
 }

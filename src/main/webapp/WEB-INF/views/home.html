@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,8 +77,12 @@
                 <p><strong>Description:</strong> <span th:text="${post.getDescription()}"></span></p>
                 <p><strong>Date:</strong> <span th:text="${post.getCreatedAt()}"></span></p>
                 <div class="actions">
-                    <button class="like-btn">Like</button>
-                    <button class="comment-btn">Comment</button>
+                    <a class="like-btn" th:href="@{/likes/like/{postId}(postId=${post.id})}">Like</a>
+<!--                    <button class="like-btn">Like</button>-->
+<!--                    <form th:method="get" >-->
+<!--                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${currentUser.id},postId=${post.getId()})}"> <button  class="comment-btn" > View Comment</button></a>-->
+<!--                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${currentUser.id},postId=${post.getId()})}"></a>-->
+                 <a th:href="@{/comments/createComment/{postId}(postId = ${post.id})}"> <button  class="comment-btn" > Comment</button></a>
                 </div>
             </div>
         </div>
@@ -101,3 +105,4 @@
 <!--</script>-->
 </body>
 </html>
+<!--th:href="@{/comment/addcomment/{postId}(postId = ${post.id})}"-->

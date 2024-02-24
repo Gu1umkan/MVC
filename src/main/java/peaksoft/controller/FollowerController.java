@@ -40,7 +40,7 @@ public class FollowerController {
 
     @GetMapping("/follow/{foundUserId}")
     public String following(Model model,@PathVariable Long foundUserId){
-        model.addAttribute("foundUserId",foundUserId);
+         model.addAttribute("foundUserId",foundUserId);
         followerService.following(currentUser.getId(),foundUserId);
         model.addAttribute("currentUser",currentUser);
         model.addAttribute("subcribers", followerService.subcriberSize(currentUser.getFollower().getId()));

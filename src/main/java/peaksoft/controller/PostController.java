@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.entity.Post;
 import peaksoft.service.FollowerService;
+import peaksoft.service.LikeService;
 import peaksoft.service.PostService;
 import peaksoft.service.UserService;
 
@@ -22,11 +23,13 @@ public class PostController {
     private final PostService postService;
     private final UserService userService;
     private final FollowerService followerService;
-
+    private final LikeService likeService;
 
 
     @GetMapping("/all")
-    public String getAllPosts(Model model){
+    public String getAllPosts(Model model , @PathVariable Long postId){
+        model.addAttribute("countLike",likeService.contLike(postId));
+        model.addAttribute("likePostUser",likeService.getLikes());
         model.addAttribute("allPost",postService.getAllPost());
         return "/home";
     }
@@ -35,6 +38,7 @@ public class PostController {
     public String createPost(Model model){
         Post post = new Post();
         model.addAttribute("newPost",post);
+
         return "new-post";
     }
 
@@ -71,8 +75,9 @@ public class PostController {
     }
 
     @PostMapping("/editUpdate/{postId}")
-    public String updateCompany(@ModelAttribute("post") Post post ,@PathVariable ("postId")Long postId){
+    public String updateCompany(@ModelAttribute("post") Post post ,@PathVariable ("postId")Long postId, Model model){
         postService.update(postId,post);
+        model.addAttribute("userPost", postService.getAllPostByUserId(currentUser.getId()));
         return "my-post";
     }
 

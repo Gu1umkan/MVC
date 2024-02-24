@@ -28,7 +28,7 @@ public class Post extends BaseEntity{
     private List<Image> images;
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",cascade ={CascadeType.PERSIST,CascadeType.DETACH})
     private List<Like> likes;
 
 
@@ -40,8 +40,14 @@ public class Post extends BaseEntity{
         images.add(image);
     }
 
-//    public void addImage(List<Image> imagess){
-//        if (images == null) images=new ArrayList<>();
-//        images.addAll(imagess);
-//    }
+
+    public void addComment(Comment comment){
+        if(this.comments == null)this.comments = new ArrayList<>();
+        this.comments.add(comment);
+    }
+    public void addLike(Like like){
+        if(this.likes == null)this.likes = new ArrayList<>();
+        this.likes.add(like);
+    }
+
 }

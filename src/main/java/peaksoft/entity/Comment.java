@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,9 @@ public class Comment extends BaseEntity{
     @OneToMany(mappedBy = "comment")
     private List<Like> likes;
 
-
+   public void addLike(Like like){
+       if(this.likes == null) this.likes = new ArrayList<>();
+       this.likes.add(like);
+   }
 
 }

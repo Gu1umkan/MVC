@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import peaksoft.entity.Comment;
 import peaksoft.entity.Like;
 import peaksoft.entity.Post;
 import peaksoft.entity.User;
@@ -74,4 +75,26 @@ public class LikeRepoImpl implements LikeRepo {
         });
         return hashMap;
     }
+
+    public void isLikeComment(Long userId,Long commentId,Like like){
+        Comment comment = entityManager.find(Comment.class, commentId);
+        User user = entityManager.find(User.class, userId);
+        boolean islike = true;
+        for (Like like1: comment.getLikes()){
+            if(like1.getUser().getId().equals(userId)){
+                like1.setIsLike(false);
+                like1.setUser(null);
+                like1.setPost(null);
+                comment.getLikes().remove(like1);
+                entityManager.remove(like1);
+                islike = false;
+                break;
+            }
+        }
+        if (islike){like.setUser(user);
+            comment.addLike(like);
+            like.setComment(comment);
+            entityManager.persist(like);}
+    }
+
 }

@@ -78,11 +78,7 @@
                 <p><strong>Date:</strong> <span th:text="${post.getCreatedAt()}"></span></p>
                 <div class="actions">
                     <a class="like-btn" th:href="@{/likes/like/{postId}(postId=${post.id})}">Like</a>
-<!--                    <button class="like-btn">Like</button>-->
-<!--                    <form th:method="get" >-->
-<!--                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${currentUser.id},postId=${post.getId()})}"> <button  class="comment-btn" > View Comment</button></a>-->
-<!--                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${currentUser.id},postId=${post.getId()})}"></a>-->
-                 <a th:href="@{/comments/createComment/{postId}(postId = ${post.id})}"> <button  class="comment-btn" > Comment</button></a>
+                    <a th:href="@{/comments/createComment/{postId}(postId = ${post.id})}"> <button  class="comment-btn" > Comment</button></a>
                 </div>
             </div>
         </div>

@@ -27,9 +27,9 @@ public class PostController {
 
 
     @GetMapping("/all")
-    public String getAllPosts(Model model , @PathVariable Long postId){
-        model.addAttribute("countLike",likeService.contLike(postId));
-        model.addAttribute("likePostUser",likeService.getLikes());
+    public String getAllPosts(Model model ){
+//        model.addAttribute("countLike",likeService.contLike(postId));
+//        model.addAttribute("likePostUser",likeService.getLikes());
         model.addAttribute("allPost",postService.getAllPost());
         return "/home";
     }

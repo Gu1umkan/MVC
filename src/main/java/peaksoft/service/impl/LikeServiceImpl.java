@@ -24,6 +24,13 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
+    public void isLikeComment(Long userId, Long commentId) {
+        Like like = new Like();
+        like.setIsLike(true);
+        likeRepo.saveLike(userId,commentId,like);
+    }
+
+    @Override
     public int contLike(Long postId) {
         return likeRepo.contLike(postId);
     }

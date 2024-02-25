@@ -32,7 +32,7 @@ public class CommentController {
     @PostMapping("/addComment/{postId}")
     public String saveComment(@PathVariable Long postId, @ModelAttribute("newComment") Comment newComment){
         commentService.createComment(currentUser.getId(),postId,newComment);
-        return "/home";
+        return "redirect:/post/all";
     }
 
 }

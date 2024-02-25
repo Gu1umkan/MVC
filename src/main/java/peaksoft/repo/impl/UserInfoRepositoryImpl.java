@@ -21,14 +21,11 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
 
     @Override
     public UserInfo update(Long userInfoId,UserInfo newUserInfo) {
-//        entityManager.getTransaction().begin();
         UserInfo current = entityManager.find(UserInfo.class, userInfoId);
         current.setFullName(newUserInfo.getFullName());
         current.setBiography(newUserInfo.getBiography());
         current.setImage(newUserInfo.getImage());
         current.setGender(newUserInfo.getGender());
-//        entityManager.merge(current);
-//        entityManager.getTransaction().commit();
         return current;
     }
 

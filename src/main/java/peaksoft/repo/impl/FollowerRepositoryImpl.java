@@ -10,6 +10,7 @@ import peaksoft.entity.Follower;
 import peaksoft.entity.User;
 import peaksoft.repo.FollowerRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -34,25 +35,6 @@ public class FollowerRepositoryImpl implements FollowerRepository {
 
     @Override
     public void following(Long currentUserId, Long foundUserId) {
-//        User currentUser = entityManager.find(User.class, currentUserId);
-//        User foundUser = entityManager.find(User.class,foundUserId);
-//      if(currentUser.getFollower().getSubscription() == null) {
-//          currentUser.getFollower().setSubscription(new ArrayList<>());
-//          currentUser.getFollower().setSubscription(new ArrayList<>());
-//          foundUser.getFollower().setSubscribers(new ArrayList<>());
-//          foundUser.getFollower().setSubscribers(new ArrayList<>());
-//      }
-//        HashSet<Long> setCurrent = new HashSet<>(currentUser.getFollower().getSubscription());
-//        HashSet<Long> setFound = new HashSet<>(currentUser.getFollower().getSubscription());
-//
-//        setCurrent.add(foundUserId);
-//        setFound.add(currentUserId);
-//
-//        currentUser.getFollower().getSubscription().clear();
-//        foundUser.getFollower().getSubscribers().clear();
-//
-//        currentUser.getFollower().getSubscription().addAll(setCurrent);
-//        foundUser.getFollower().getSubscribers().addAll(setCurrent);
         User currentUser = entityManager.find(User.class, currentUserId);
         User foundUser = entityManager.find(User.class, foundUserId);
 
@@ -62,7 +44,7 @@ public class FollowerRepositoryImpl implements FollowerRepository {
         boolean foundUs = false;
 
         for (Long subscriptionId : subscriptions) {
-            if (subscriptionId.equals(foundUserId)){
+            if (subscriptionId.equals(foundUserId)) {
                 subscriptions.remove(subscriptionId);
                 foundUs = true;
                 break;
@@ -72,7 +54,7 @@ public class FollowerRepositoryImpl implements FollowerRepository {
 
 
         for (Long subscriber : subscribers) {
-            if (subscriber.equals(currentUserId)){
+            if (subscriber.equals(currentUserId)) {
                 subscribers.remove(subscriber);
                 foundUs = true;
                 break;
@@ -80,6 +62,27 @@ public class FollowerRepositoryImpl implements FollowerRepository {
         }
         if (!foundUs) subscribers.add(currentUserId);
 
+    }
+
+    public List<User> getSubscriptionsByUserId(Long userId) {
+        User currentUser = entityManager.find(User.class, userId);
+        List<User> users = new ArrayList<>();
+        currentUser.getFollower().getSubscription().forEach(id -> {
+                    users.add(entityManager.find(User.class, id));
+                }
+        );
+        return users;
+    }
+
+    @Override
+    public List<User> getSubscribersByUserId(Long userId) {
+        User currentUser = entityManager.find(User.class, userId);
+        List<User> users = new ArrayList<>();
+        currentUser.getFollower().getSubscribers().forEach(id -> {
+                    users.add(entityManager.find(User.class, id));
+                }
+        );
+        return users;
     }
 
 

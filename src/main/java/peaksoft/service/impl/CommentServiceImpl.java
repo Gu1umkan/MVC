@@ -24,4 +24,14 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getCommentsByPostId(Long postId) {
         return commentRepo.getCommentsByPostId(postId);
     }
+
+    @Override
+    public void deleteComment(Long commentId) {
+        commentRepo.deleteComment(commentId);
+    }
+
+    @Override
+    public void updateComment(Long commentId, Comment newComment) {
+        commentRepo.updateComment(commentId, newComment);
+    }
 }

@@ -24,12 +24,14 @@ public class Comment extends BaseEntity{
     private User user;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Post post;
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment",cascade = CascadeType.REMOVE)
     private List<Like> likes;
 
    public void addLike(Like like){
        if(this.likes == null) this.likes = new ArrayList<>();
        this.likes.add(like);
    }
+
+
 
 }

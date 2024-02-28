@@ -32,7 +32,15 @@ public class CommentController {
     @PostMapping("/addComment/{postId}")
     public String saveComment(@PathVariable Long postId, @ModelAttribute("newComment") Comment newComment){
         commentService.createComment(currentUser.getId(),postId,newComment);
-        return "redirect:/post/all";
+        return "redirect:/comments/createComment/"+postId;
+    }
+    @GetMapping("delete/{postId}/{commentId}")
+    public String deleteComment(@PathVariable Long commentId,@PathVariable Long postId,Model model){
+        commentService.deleteComment(commentId);
+//        Post postById = postService.findPostById(postId);
+//        model.addAttribute("foundPost",postById);
+//        model.addAttribute("foundPostComments",commentService.getCommentsByPostId(postId));
+        return "redirect:/comments/createComment/"+postId;
     }
 
 }

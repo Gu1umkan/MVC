@@ -20,7 +20,6 @@ public class CommentRepositoryImpl implements CommentRepo {
   private final EntityManager entityManager;
     @Override
     public void createComment(Long userId, Long postId, Comment comment) {
-//        entityManager.getTransaction().begin();
         User user = entityManager.find(User.class, userId);
         Post post = entityManager.find(Post.class, postId);
         user.addComment(comment);
@@ -28,11 +27,21 @@ public class CommentRepositoryImpl implements CommentRepo {
         comment.setPost(post);
         comment.setUser(user);
         entityManager.persist(comment);
-//        entityManager.getTransaction().commit();
     }
 
     @Override
     public List<Comment> getCommentsByPostId(Long postId) {
-        return entityManager.createQuery("select c from Comment c where c.post.id=:postId",Comment.class).setParameter("postId",postId).getResultList();
+        return entityManager.createQuery("select c from Comment c " +
+                "where c.post.id=:postId",Comment.class).setParameter("postId",postId).getResultList();
+    }
+    public void deleteComment(Long commentId){
+        Comment comment = entityManager.find(Comment.class, commentId);
+        entityManager.remove(comment);
+    }
+
+    @Override
+    public void updateComment(Long commentId, Comment newComment) {
+        Comment comment = entityManager.find(Comment.class, commentId);
+        comment.setComment(newComment.getComment());
     }
 }

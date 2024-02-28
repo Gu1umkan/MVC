@@ -173,8 +173,9 @@
                         <p><strong>Comment:</strong> <span th:text="${comment.comment}"></span></p>
                         <p><strong>Date:</strong> <span th:text="${comment.createdAt}"></span></p>
                         <div class="actions">
-<!--                            <a class="like-btn" th:href="@{/likes/likeComment/{commentId}(commentId=${comment.id})}">Like</a>-->
-<!--                            <a th:href="@{/comments/createComment/{postId}(postId = ${post.id})}"> <button  class="comment-btn" > delete</button></a>-->
+                            <a class="like-btn" th:href="@{/likes/likeComment/{commentId}(commentId=${comment.id})}">Like</a>
+                            <a th:href="@{/comments/delete/{postId}/{commentId}(postId = ${foundPost.getId()},commentId=${comment.id})}" class="comment-btn" > delete</a>
+<!--                            <button  class="comment-btn" > update</button>-->
                         </div>
                     </div>
                     <form action="#" th:action="@{/comments/addComment/{postId}(postId =${foundPost.id})}"

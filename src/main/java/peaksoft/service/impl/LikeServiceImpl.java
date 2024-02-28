@@ -3,13 +3,11 @@ package peaksoft.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import peaksoft.entity.Like;
-import peaksoft.entity.Post;
 import peaksoft.entity.User;
 import peaksoft.repo.LikeRepo;
 import peaksoft.service.LikeService;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +25,7 @@ public class LikeServiceImpl implements LikeService {
     public void isLikeComment(Long userId, Long commentId) {
         Like like = new Like();
         like.setIsLike(true);
-        likeRepo.saveLike(userId,commentId,like);
+        likeRepo.isLikeComment(userId,commentId,like);
     }
 
     @Override
@@ -36,7 +34,7 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public Map<Post, List<User>> getLikes() {
-        return likeRepo.getLikes();
+    public List<User> getLikes(Long postId) {
+        return likeRepo.getLikes(postId);
     }
 }

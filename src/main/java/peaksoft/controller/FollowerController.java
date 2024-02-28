@@ -10,6 +10,8 @@ import peaksoft.service.FollowerService;
 import peaksoft.service.PostService;
 import peaksoft.service.UserService;
 
+import java.util.List;
+
 import static peaksoft.controller.UserController.currentUser;
 
 @Controller
@@ -43,10 +45,18 @@ public class FollowerController {
          model.addAttribute("foundUserId",foundUserId);
         followerService.following(currentUser.getId(),foundUserId);
         model.addAttribute("currentUser",currentUser);
-        model.addAttribute("subcribers", followerService.subcriberSize(currentUser.getFollower().getId()));
-        model.addAttribute("subcribtions", followerService.subcriptionSize(currentUser.getFollower().getId()));
+        model.addAttribute("subcribers", followerService.getSubscribersByUserId(currentUser.getId()).size());
+        model.addAttribute("subcribtions", followerService.getSubscriptionsByUserId(currentUser.getId()).size());
         model.addAttribute("post",postService.getAllPostByUserId(currentUser.getId()).size());
         return "profile";
+    }
+
+    @GetMapping("/getSubscribtion")
+    public String getLikes( Model model){
+        List<User> users = followerService.getSubscriptionsByUserId(currentUser.getId());
+        model.addAttribute("users", users);
+        model.addAttribute("userId", currentUser.getId());
+        return "redirect:/follower/searchUser";
     }
 
 }

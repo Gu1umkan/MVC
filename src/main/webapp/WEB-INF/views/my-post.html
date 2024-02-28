@@ -53,18 +53,18 @@
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 5px;
-            padding: 8px 16px;
+            border-radius: 3px;
+            padding: 4px 12px;
             margin-right: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.1s;
         }
         .like-btn:hover, .comment-btn:hover {
             background-color: #0056b3;
         }
         .botton{
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 5px 10px;
+            border-radius: 3px;
         }
     </style>
 </head>
@@ -81,10 +81,11 @@
                 <p><strong>Description:</strong> <span th:text="${post.getDescription()}"></span></p>
                 <p><strong>Date:</strong> <span th:text="${post.getCreatedAt()}"></span></p>
                 <div class="actions">
-                    <button class="like-btn">Like</button>
-                    <button class="comment-btn">Comment</button>
+                    <a class="like-btn" th:href="@{/likes/like/{postId}(postId=${post.id})}">Like</a>
+                    <a th:href="@{/comments/createComment/{postId}(postId = ${post.id})}"> <button  class="comment-btn" > Comment</button></a>
                 </div>
                 <td>
+                    <a th:href="@{/likes/getLikes/{postId}(postId=${post.getId()})}" class="like-btn">view likes</a>
                     <a th:href="@{/post/delete/{postId}(postId=${post.id})}" class="botton">Delete</a>
                     <a th:href="@{/post/update/{postId}(postId=${post.id})}" class="botton">Update</a>
                 </td>
